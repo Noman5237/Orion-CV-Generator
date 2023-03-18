@@ -1,6 +1,7 @@
 import { Route, Routes, Link } from 'react-router-dom';
 
 import styles from './app.module.scss';
+import AuthPage from './Auth/AuthPage';
 
 import { Home } from './home/home';
 
@@ -14,6 +15,10 @@ export function App() {
 					</li>
 					<li>
 						<Link to="/page-2">Page 2</Link>
+					</li>
+
+					<li>
+						<Link to="/auth">auth</Link>
 					</li>
 				</ul>
 			</div>
@@ -34,6 +39,12 @@ export function App() {
 							Page 2
 							<Link to="/">Click here to go back to root page.</Link>
 						</div>
+					}
+				/>
+					<Route
+					path="/auth"
+					element={
+						<AuthPage></AuthPage>
 					}
 				/>
 			</Routes>
