@@ -19,7 +19,8 @@
         "styles": ["apps/frontend/src/styles.scss"],
         "scripts": [],
         "isolatedConfig": true,
-        "webpackConfig": "apps/frontend/webpack.config.js"
+        "webpackConfig": "apps/frontend/webpack.config.js",
+        "postcssConfig": "apps/frontend/postcss.config.js"
       },
       "configurations": {
         "development": {
@@ -50,7 +51,7 @@
       "options": {
         "buildTarget": "frontend:build",
         "hmr": true,
-				"proxyConfig": "apps/frontend/proxy.conf.json"
+        "proxyConfig": "apps/frontend/proxy.conf.json"
       },
       "configurations": {
         "development": {
