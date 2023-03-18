@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+' create frontend package
+package "Client" {
+  [User]
+  [Browser]
+  [Frontend]
+}
+
+' create backend package
+package "Backend" {
+  [Core Sever]
+  [ML Machine]
+}
+
+' create database package
+package "Database" {
+' add postgres, mongo, redis, and minio
+    [Postgres]
+    [Mongo]
+    [Redis]
+    [Minio]
+}
+
+' connect frontend package
+User --> Browser
+Browser --> Frontend
+' connect frontend and backend package
+Frontend --> Backend
+' connect backend package
+Backend --> Database
+
+' add external api packages
+package "External APIs" {
+    [Google]
+    [Github]
+    [LinkedIn]
+    [OpenAI]
+}
+
+' connect external api packages to backend
+Backend --> "External APIs"
+
+@enduml

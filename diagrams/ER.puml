@@ -1,0 +1,84 @@
+@startuml
+' create an entity user with id, username, password, email, and role
+entity user {
+  id
+  username
+  password
+  email
+  image
+  github_id
+  linkedin_id
+  dob date
+}
+
+' create an entity cv template id, name, description, views, downloads, published
+entity cv_template {
+  id
+  name
+  description
+  views
+  downloads
+  published
+}
+
+entity profile {
+    user_id
+    sections
+    privacy
+}
+
+entity sections {
+    id
+    name
+    data_type
+    data
+}
+
+' create an entity cv with id, name, description, views
+entity cv {
+  id
+  name
+  description
+  views
+  section_references
+  shared_link
+  language_variant_id
+}
+
+' table for example cvs
+entity role_model_cvs {
+    cv_id
+}
+
+' table for feedback
+entity feedback {
+    id
+    user_id
+    cv_id
+    xpath
+    start
+    end
+}
+
+' table for cover letters
+entity cover_letter {
+    id
+    user_id
+    cv_id
+    cover_letter
+}
+
+' connect the entities with relationships
+user "1" -- "1" profile
+profile "1" -- "n" sections
+user "1" -- "n" cv
+cv "1" -- "n" role_model_cvs
+cv "1" -- "n" feedback
+cv "1" -- "1" cover_letter
+cv "1" -- "1" cv_template
+' one profile to many cvs
+profile "1" -- "n" cv
+' one cv to many sections
+cv "1" -- "n" sections
+
+@enduml
