@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { TextWidget } from "../widgets/Widgets";
+import { useState } from 'react';
+import { TextWidget } from '../widgets/Widgets';
+// import { ListWidget } from '../widgets/ListWidget';
 
 const CVPage = () => {
   const widgets = [TextWidget];
@@ -10,21 +11,19 @@ const CVPage = () => {
     setSelectedWidgets([...selectedWidgets, widget]);
   };
 
-
-  return (<>
-    {
-      widgets.map((widget) =>
+  return (
+    <>
+      {widgets.map((widget) => (
         <p key={widget.widgetName} onClick={() => onClick(widget)}>
-          {widget.widgetName}</p>)
-    }
+          {widget.widgetName}
+        </p>
+      ))}
 
-    {
-      selectedWidgets.map((Widget: any, index: number) => {
-        return <Widget key={index} />
-      })
-    }
-
-  </>);
+      {selectedWidgets.map((Widget: any, index: number) => {
+        return <Widget key={index} />;
+      })}
+    </>
+  );
 };
 
 export { CVPage };

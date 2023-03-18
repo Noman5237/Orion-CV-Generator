@@ -3,8 +3,8 @@ import { useAppSelector } from '../store/hooks';
 import { useForm } from 'react-hook-form';
 import Draggable from 'react-draggable';
 
-interface TextWidgetDto {
-  value: 'name' | 'personal' | 'educations';
+interface ListWidgetDto {
+  value: 'skills' | 'experience' | 'languages';
 }
 
 const getKeyValue =
@@ -12,28 +12,28 @@ const getKeyValue =
   (obj: T) =>
     obj[key];
 
-const TextWidget = () => {
+const ListWidget = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TextWidgetDto>({});
+  } = useForm<ListWidgetDto>({});
 
-  const [value, setValue] = useState<string | null>(null);
+  const [values, setValues] = useState<string[] | null>([]);
 
   const profile = useAppSelector((state) => state.profile.value);
 
-  const onSubmit = (path: TextWidgetDto) => {
+  const onSubmit = (path: ListWidgetDto) => {
     console.log(path);
     const directives = path.value.split('.');
-    const pathValue = directives.reduce((data, currentValue: any) => {
+    const list = directives.reduce((data, currentValue: any) => {
       console.log(data);
       return Object.entries(profile).find(
         ([key, value]) => key === currentValue
       )![1];
     });
-    console.log(pathValue);
-    setValue(pathValue);
+    console.log(list);
+    setValues([...list, list]);
   };
 
   return (
@@ -52,13 +52,17 @@ const TextWidget = () => {
           </button>
         </form>
         <div className="mt-4 border-solid border-2 border-gray-400 p-2 rounded-md">
-          <p>{value}</p>
+          <ul>
+            {values.map((value, index) => (
+              <li key={index}>{value}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </Draggable>
   );
 };
 
-TextWidget.widgetName = 'TextWidget';
+ListWidget.widgetName = 'ListWidget';
 
-export { TextWidget };
+export { ListWidget };
