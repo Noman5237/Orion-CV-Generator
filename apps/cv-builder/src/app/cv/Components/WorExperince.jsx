@@ -1,32 +1,32 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Form, Input, DatePicker, Button,Typography  , Card } from 'antd';
+import { Form, Input, DatePicker, Button, Typography, Card , Select } from 'antd';
 
 const { Title } = Typography;
-const EducationForm = ({onSave}) => {
+
+const WorkExperienceForm = ({onSave}) => {
   const dispatch = useDispatch();
-  const [education, setEducation] = useState({});
-  const [form] = Form.useForm();
+  const [workExperience, setWorkExperience] = useState([]);
+
   const onFinish = (values) => {
-    const educ = {
-      school: values.school,
-      degree: values.degree,
-      fieldOfStudy: values.fieldOfStudy,
+    const experience = {
+      employer: values.employer,
+      jobTitle: values.jobTitle,
       startDate: values.startDate.format('YYYY-MM-DD'),
-      endDate: values.endDate.format('YYYY-MM-DD'),
+      endDate: values.endDate ? values.endDate.format('YYYY-MM-DD') : 'Present',
+     
     };
-    setEducation(educ);
-    
-    onSave(educ);
-     form.resetFields();
+    setWorkExperience([...workExperience, experience]);
+    onSave(workExperience);
   };
+
   const [formVisible, setFormVisible] = useState(false);
-    const handleExpandForm = () => {
+  const handleExpandForm = () => {
     setFormVisible(!formVisible);
   };
 
   return (
-     <Card
+    <Card
       style={{
         border: '1px solid #ccc',
         borderRadius: 8,
@@ -43,36 +43,25 @@ const EducationForm = ({onSave}) => {
         }}
       >
         <Title mark level="2">
-          Education Information
+          Work Experience Information
         </Title>
         <Button onClick={handleExpandForm}>
-          {formVisible ? 'Hide Form' : 'Add Education'}
+          {formVisible ? 'Hide Form' : 'Add Work Experience'}
         </Button>
       </div>
       {formVisible && (
-        <Form form={form} onFinish={onFinish} layout="vertical">
+        <Form onFinish={onFinish} layout="vertical">
           <Form.Item
-            label="School/University"
-            name="school"
-            rules={[
-              { required: true, message: 'Please enter school/university' },
-            ]}
+            label="Employer"
+            name="employer"
+            rules={[{ required: true, message: 'Please enter employer name' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            label="Degree"
-            name="degree"
-            rules={[{ required: true, message: 'Please enter degree' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Field of Study"
-            name="fieldOfStudy"
-            rules={[
-              { required: true, message: 'Please enter field of study' },
-            ]}
+            label="Job Title"
+            name="jobTitle"
+            rules={[{ required: true, message: 'Please enter job title' }]}
           >
             <Input />
           </Form.Item>
@@ -83,16 +72,21 @@ const EducationForm = ({onSave}) => {
           >
             <DatePicker />
           </Form.Item>
-          <Form.Item
-            label="End Date"
-            name="endDate"
-            rules={[{ required: true, message: 'Please select end date' }]}
-          >
+          <Form.Item label="End Date" name="endDate">
             <DatePicker />
           </Form.Item>
+          <Form.Item
+            label="Ongoing"
+            name="ongoing"
+            valuePropName="checked"
+            style={{ marginBottom: 0 }}
+          >
+            <input type="checkbox" />
+          </Form.Item>
+          
           <Form.Item>
             <Button type="default" htmlType="submit">
-              Add Education
+              Add Work Experience
             </Button>
           </Form.Item>
         </Form>
@@ -101,4 +95,4 @@ const EducationForm = ({onSave}) => {
   );
 };
 
-export default EducationForm;
+export  default WorkExperienceForm;
