@@ -6,7 +6,7 @@ const { Title } = Typography;
 
 const ProjectForm = ({onSave}) => {
   const dispatch = useDispatch();
-  const [projects, setProjects] = useState([]);
+  
   const [formVisible, setFormVisible] = useState(false);
     const [tags, setTags] = useState([]);
 
@@ -23,8 +23,8 @@ const removeTag = (tag) => {
       link: values.link,
       tags: values.tags,
     };
-    setProjects([...projects, project]);
-    onSave(projects);
+   
+    onSave(project);
   };
 
   const handleExpandForm = () => {
@@ -82,7 +82,7 @@ const removeTag = (tag) => {
           </Form.Item>
         <Form.Item
             label="Technologies Used"
-            name="technologies"
+            name="tags"
             rules={[
               {
                 required: true,
@@ -93,6 +93,7 @@ const removeTag = (tag) => {
           >
             <Select
               mode="tags"
+              name="tags"
               style={{ width: '100%' }}
               tokenSeparators={[',']}
             />

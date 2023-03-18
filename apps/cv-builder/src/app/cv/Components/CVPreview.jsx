@@ -47,12 +47,29 @@ const CVPreview = ({ educationData, workExperienceData, contactInfoData, project
           <br />
           <Text>{project.description}</Text>
           <br />
-          <Text type="secondary">Technologies used: {project.technologies.join(', ')}</Text>
+          <Text type="secondary">Technologies used: {project.tags.join(', ')}</Text>
           <br />
           <Text>Link: {project.link}</Text>
           <br />
         </div>
       ))}
+        <Divider />
+      <Title level={3}>Contact Info</Title>
+      {contactInfoData.map((info, index) => (
+        <div key={index}>
+          <Title level={4}>{info.email}</Title>
+          <Text>{info.phoneNumber} </Text>
+          <br />
+          <Text>Link : {info.linkedIn}</Text>
+          <br />
+          
+          <Text>Link: {info.github}</Text>
+          <br />
+        </div>
+      ))}
+
+
+    
       
     </div>
   );

@@ -4,7 +4,7 @@ import { Input, Button,Typography , Card ,Form} from 'antd';
 
 const { Title } = Typography;
 const ContactForm = ({onSave}) => {
-  const [contactInfo, setContactInfo] = useState({});
+ 
    const [form] = Form.useForm();
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -19,7 +19,7 @@ const ContactForm = ({onSave}) => {
         github,
 
     }
-    setContactInfo(contactInfo);
+   
    onSave(contactInfo);
 
   };

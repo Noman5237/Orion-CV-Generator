@@ -17,7 +17,7 @@ const WorkExperienceForm = ({onSave}) => {
      
     };
     setWorkExperience([...workExperience, experience]);
-    onSave(workExperience);
+    onSave(experience);
   };
 
   const [formVisible, setFormVisible] = useState(false);
