@@ -75,5 +75,38 @@ export class AiController {
     return response.data.choices[0].text;
   }
 
+  @Post('/job-matching')
+  public async jobMatching(@Body() body: {
+    jobDescription: string,
+    skills: string[],
+    projects: { name: string, description: string, technologies: string[] }[]
+  }) {
+    const { jobDescription, skills, projects } = body;
+    console.log(body);
+
+    const prompt = `
+      Sort the following items in order of relevance to the following job description in '{"skills":[0, 2, 1], "projects": [0, 1]}' format:
+      Job Description: ${jobDescription}
+      Skills: ${skills.join(', ')}
+      Projects: ${projects.join(', ')}
+    `;
+
+    const response = await this.openai.createCompletion({
+      model: "text-davinci-003",
+      prompt,
+      temperature: 0,
+      max_tokens: 50,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+    });
+
+    console.log(response.data);
+    // \n    {skills: [2, 1, 3, 4, 0], projects: [0, 1, 2]};
+    const usefulData = response.data.choices[0].text.match(/{.*}/)[0]
+    console.log(usefulData);
+    const result = JSON.parse(usefulData);
+    return result;
+  }
 
 }
