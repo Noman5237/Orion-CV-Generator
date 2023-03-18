@@ -12,6 +12,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { PassportModule } from '@nestjs/passport';
 import { SessionSerializer } from './signin/signin/Serializer/Serializer';
 import { CvModule } from './cv/cv.module';
+import { AiModule } from './ai/ai.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { CvModule } from './cv/cv.module';
     ConfigModule.forRoot({}),
     PassportModule.register({ defaultStrategy: 'jwt', session: true }),
     CvModule,
+    AiModule,
   ],
   controllers: [],
   providers: [
