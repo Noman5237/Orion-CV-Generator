@@ -53,7 +53,8 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "cv-builder:build",
-        "hmr": true
+        "hmr": true,
+        "proxyConfig": "apps/frontend/proxy.conf.json"
       },
       "configurations": {
         "development": {

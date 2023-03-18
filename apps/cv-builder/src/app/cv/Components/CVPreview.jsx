@@ -1,10 +1,11 @@
 import React from 'react';
-import { Typography, Divider } from 'antd';
+import { Typography, Divider, Button } from 'antd';
+import axios from 'axios';
 
 const { Title, Text } = Typography;
 
-const CVPreview = ({ educationData, workExperienceData, contactInfoData, projectsData}) => {
-    console.log(educationData , workExperienceData , contactInfoData , projectsData)
+const CVPreview = ({ educationData, workExperienceData, contactInfoData, projectsData, changeData }) => {
+  console.log(educationData, workExperienceData, contactInfoData, projectsData)
 
   return (
     <div>
@@ -46,6 +47,14 @@ const CVPreview = ({ educationData, workExperienceData, contactInfoData, project
           <Text>{project.startDate} - {project.endDate || 'Present'}</Text>
           <br />
           <Text>{project.description}</Text>
+          {/* add a button for proofreading */}
+          <Button type="default" onClick={async () => {
+            const response = await axios.post('/api/ai/grammar-correction', {
+              text: project.description
+            });
+            projectsData[index].description = response.data.trim();
+            changeData('projects', projectsData);
+          }}>Proofread</Button>
           <br />
           <Text type="secondary">Technologies used: {project.tags.join(', ')}</Text>
           <br />
@@ -53,7 +62,7 @@ const CVPreview = ({ educationData, workExperienceData, contactInfoData, project
           <br />
         </div>
       ))}
-        <Divider />
+      <Divider />
       <Title level={3}>Contact Info</Title>
       {contactInfoData.map((info, index) => (
         <div key={index}>
@@ -62,15 +71,15 @@ const CVPreview = ({ educationData, workExperienceData, contactInfoData, project
           <br />
           <Text>Link : {info.linkedIn}</Text>
           <br />
-          
+
           <Text>Link: {info.github}</Text>
           <br />
         </div>
       ))}
 
 
-    
-      
+
+
     </div>
   );
 };

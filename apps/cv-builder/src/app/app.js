@@ -3,8 +3,6 @@ import { Breadcrumb, Layout, Menu, theme } from 'antd';
 
 import React, { useState } from 'react';
 
-import CVPage from './cv/cv-page';
-
 import CvEditor from './cv/CvEditor';
 
 const { Header, Content, Footer } = Layout;
