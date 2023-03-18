@@ -12,7 +12,6 @@ interface ProfileState {
 }
 
 const profile = {
-  name: 'John Doe',
   personal: {
     name: 'John Doe',
     email: 'john@orion.org',
