@@ -5,7 +5,7 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, theme } from 'antd';
+import { Layout, Menu, theme,Row,Col } from 'antd';
 import React, { useState } from 'react';
 import { CVPage } from './cv-page';
 import './sidebar.css';
@@ -28,17 +28,17 @@ const Lay = () => {
             {
               key: '1',
               icon: <UserOutlined />,
-              label: 'nav 1',
+              label: 'Profile',
             },
             {
               key: '2',
               icon: <VideoCameraOutlined />,
-              label: 'nav 2',
+              label: 'Edit Profile',
             },
             {
               key: '3',
               icon: <UploadOutlined />,
-              label: 'nav 3',
+              label: 'Upload CV',
             },
           ]}
         />
@@ -63,7 +63,15 @@ const Lay = () => {
             background: colorBgContainer,
           }}
         >
-         <CVPage></CVPage>
+             <Row>
+    <Col span={18} push={6}>
+      
+    </Col>
+    <Col span={6} pull={18}>
+      <CVPage></CVPage>
+    </Col>
+  </Row>
+         
         </Content>
       </Layout>
     </Layout>

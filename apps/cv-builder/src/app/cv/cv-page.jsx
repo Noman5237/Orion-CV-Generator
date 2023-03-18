@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TextWidget } from "../widgets/Widgets";
 import { ListWidget } from "../widgets/Listwidget";
-
+import { Button, Space } from 'antd';
 
 const CVPage = () => {
   const widgets = [TextWidget , ListWidget];
@@ -18,8 +18,11 @@ const CVPage = () => {
   
    {
       widgets.map((widget) =>
-        <p key={widget.widgetName} onClick={() => onClick(widget)}>
-          {widget.widgetName}</p>)
+       <Button block>
+      <p key={widget.widgetName} onClick={() => onClick(widget)}>
+          {widget.widgetName}</p>
+    </Button>
+        )
     }
 
     {

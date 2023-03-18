@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import Draggable from 'react-draggable';
 
-
+import { Col, Row } from 'antd';
 const TextWidget = () => {
   const {
     register,
@@ -17,8 +17,13 @@ const[text, setText] = useState('Enter Text Here');
 
 const [isBold, setBold] = useState(false);
 const handleBold = () => {
+    
 
+  if(isBo === "bold"){
+    setBold("normal");}
+  else{
     setBold("bold");
+  }
    
   };
 
@@ -73,7 +78,7 @@ const handleHpver = (event) =>{
       <div onMouseLeave={handleMouseMoveOut} className=" p-4 border border-gray-400 rounded-md shadow-md"
       
       style={{
-            width: '40%',
+            width: '70%',
             border: '2px solid black',
             padding: '5px',
             borderRadius: '5px',
@@ -149,7 +154,7 @@ const handleHpver = (event) =>{
          hidden={visible}
         className="flex items-center justify-between"
 
-          type="radio"
+          type="checkbox"
           id="bold"
           name="bold"
           value={isBold}
@@ -165,6 +170,6 @@ const handleHpver = (event) =>{
   );
 };
 
-TextWidget.widgetName = 'TextWidget';
+TextWidget.widgetName = 'Add Text Widget';
 
 export { TextWidget };
