@@ -67,7 +67,7 @@ export default function () {
 //   }
 // };
 
-getUserData();
+// getUserData();
         
         console.log(res);
       })
