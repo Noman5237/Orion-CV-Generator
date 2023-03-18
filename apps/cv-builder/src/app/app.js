@@ -1,19 +1,10 @@
-import NxWelcome from './nx-welcome';
 
 import { Route, Routes, Link } from 'react-router-dom';
+import { CVPage } from './cv/cv-page';
+
 export function App() {
   return (
     <>
-      <NxWelcome title="cv-builder" />
-
-      <div />
-
-      {/* START: routes */}
-      {/* These routes and navigation have been generated for you */}
-      {/* Feel free to move and update them to fit your needs */}
-      <br />
-      <hr />
-      <br />
       <div role="navigation">
         <ul>
           <li>
@@ -29,8 +20,7 @@ export function App() {
           path="/"
           element={
             <div>
-              This is the generated root route.{' '}
-              <Link to="/page-2">Click here for page 2.</Link>
+              <CVPage />
             </div>
           }
         />
@@ -38,12 +28,12 @@ export function App() {
           path="/page-2"
           element={
             <div>
+              Page 2
               <Link to="/">Click here to go back to root page.</Link>
             </div>
           }
         />
       </Routes>
-      {/* END: routes */}
     </>
   );
 }
