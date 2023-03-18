@@ -1,4 +1,4 @@
-import { Layout, Row, Col, Menu, theme   } from 'antd';
+import { Layout, Row, Col, Menu, theme,Button   } from 'antd';
 import React, { useState } from 'react';
 import {
   MenuFoldOutlined,
@@ -15,6 +15,10 @@ import EducationForm from './Components/Education';
 import ProjectsForm from './Components/Projects';
 import WorkExperienceForm from './Components/WorExperince';
 import CVPreview from './Components/CVPreview';
+import { Link } from 'react-router-dom';
+import PersonalInformationForm from './Components/PersonalInfo';
+import SkillForm from './Components/Skill';
+
 
 
 
@@ -29,7 +33,8 @@ const [education , setEducation] = useState([])
 const [workExperience, setWorkExperience] = useState([])
 const [projects , setProjects] = useState([]);
 const [constact , setConstact] = useState([]);
-
+const [personalInfo , setPersonalInfo] = useState([])
+const [skill , setSkill] = useState([])
 
 
 const { Header, Sider, Content } = Layout;
@@ -49,6 +54,18 @@ console.log(education , projects , constact , workExperience)
    
   };
 
+const handlePersonalInformations = (data) => {
+    //window.profile.education=[...window.profile.education , data]
+    
+    setPersonalInfo([...personalInfo ,data])
+    console.log(data)
+
+}
+
+const handleSkill=(data)=>{
+    setSkill([...skill , data])
+
+}
   const handleContactInfoSave = (data) => {
     // window.profile.contact = [...window.profile.contact , data]
     // console.log(window.profile)
@@ -79,12 +96,14 @@ console.log(education , projects , constact , workExperience)
         
           <Row gutter={[16, 16]}>
       <Col span={12}>
+        <PersonalInformationForm onSave={handlePersonalInformations}></PersonalInformationForm>
         <EducationForm onSave={handleEducationSave}></EducationForm>
+        <SkillForm onSave={handleSkill}></SkillForm>
         <ContactForm onSave={handleContactInfoSave}></ContactForm> <ProjectsForm onSave={handleProjectsSave}></ProjectsForm>
         <WorkExperienceForm onSave={handleWorkExperienceSave}></WorkExperienceForm>
       </Col>
       <Col span={12}>
-        <CVPreview educationData={education}  workExperienceData={workExperience}  contactInfoData={constact} projectsData={projects}></CVPreview>
+        <CVPreview personalInfo={personalInfo} educationData={education} skillInfo={skill}  workExperienceData={workExperience}  contactInfoData={constact} projectsData={projects}></CVPreview>
         
          </Col>
     </Row>
