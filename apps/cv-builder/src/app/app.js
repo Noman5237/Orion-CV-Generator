@@ -1,6 +1,6 @@
-
 import { Route, Routes, Link } from 'react-router-dom';
 import { CVPage } from './cv/cv-page';
+import Lay from './cv/Sidebar';
 
 export function App() {
   return (
@@ -20,7 +20,8 @@ export function App() {
           path="/"
           element={
             <div>
-              <CVPage />
+              {/* <CVPage /> */}
+              <Lay></Lay>
             </div>
           }
         />
@@ -28,8 +29,7 @@ export function App() {
           path="/page-2"
           element={
             <div>
-              Page 2
-              <Link to="/">Click here to go back to root page.</Link>
+              Page 2<Link to="/">Click here to go back to root page.</Link>
             </div>
           }
         />

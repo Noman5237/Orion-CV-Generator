@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { TextWidget } from "../widgets/Widgets";
+import { ListWidget } from "../widgets/Listwidget";
+
 
 const CVPage = () => {
-  const widgets = [TextWidget];
+  const widgets = [TextWidget , ListWidget];
 
   const [selectedWidgets, setSelectedWidgets] = useState([]);
 
@@ -12,7 +14,9 @@ const CVPage = () => {
 
 
   return (<>
-    {
+
+  
+   {
       widgets.map((widget) =>
         <p key={widget.widgetName} onClick={() => onClick(widget)}>
           {widget.widgetName}</p>)
@@ -23,6 +27,7 @@ const CVPage = () => {
         return <Widget key={index} />
       })
     }
+    
 
   </>);
 };
