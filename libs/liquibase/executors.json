@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "executors": {
+    "update-all-with-tag": {
+      "implementation": "./src/executors/update-all-with-tag/executor",
+      "schema": "./src/executors/update-all-with-tag/schema.json",
+      "description": "update-all-with-tag executor"
+    },
+    "run-command": {
+      "implementation": "./src/executors/run-command/executor",
+      "schema": "./src/executors/run-command/schema.json",
+      "description": "run-command executor"
+    }
+  }
+}

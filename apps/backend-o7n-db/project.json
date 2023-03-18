@@ -1,0 +1,55 @@
+{
+	"name": "backend-o7n-db",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "apps/backend-o7n-db/src",
+	"projectType": "database-management",
+	"implicitDependencies": [
+		"liquibase"
+	],
+	"targets": {
+		"liquibase-run": {
+			"executor": "@orion/liquibase:run-command",
+			"options": {
+				"command": "{args.command}",
+				"cwd": "apps/backend-o7n-db/src/",
+				"args": {
+					"url": "jdbc:postgresql://backend-o7n-db:5432/$BACKEND_O7N_POSTGRES_NAME",
+					"username": "$BACKEND_O7N_POSTGRES_USER",
+					"password": "$BACKEND_O7N_POSTGRES_PASSWORD",
+					"changelog-file": "changelog/changelog-master.xml"
+				},
+				"docker": {
+					"image": "liquibase/liquibase:4.19.0",
+					"volumes": [
+						{
+							"hostPath": "./migrations",
+							"containerPath": "/liquibase/changelog"
+						}
+					],
+					"network": "orion_orion-vpn"
+				}
+			}
+		},
+		"update-with-tag": {
+			"executor": "nx:run-commands",
+			"options": {
+				"commands": [
+					{
+						"command": "npx nx liquibase-run backend-o7n-db --command=update --changelog-file=changelogs/{args.tag}.changelog.sql"
+					},
+					{
+						"command": "npx nx liquibase-run backend-o7n-db --command=tag --tag={args.tag}"
+					}
+				],
+				"parallel": false
+			}
+		},
+		"update-all-with-tag": {
+			"executor": "@orion/liquibase:update-all-with-tag",
+			"options": {
+				"cwd": "apps/backend-o7n-db/src/migrations"
+			}
+		}
+	},
+	"tags": []
+}

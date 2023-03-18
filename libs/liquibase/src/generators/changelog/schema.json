@@ -1,0 +1,51 @@
+{
+	"$schema": "http://json-schema.org/schema",
+	"cli": "nx",
+	"$id": "Migration-Changelog",
+	"title": "Generate Liquibase Migration Changelog",
+	"type": "object",
+	"properties": {
+		"name": {
+			"type": "string",
+			"minLength": 3,
+			"description": "",
+			"$default": {
+				"$source": "argv",
+				"index": 0
+			},
+			"x-prompt": "What name would you like to use?"
+		},
+		"project": {
+			"type": "string",
+			"description": "The project where the component will be located.",
+			"x-prompt": "Which project will this component be located in?",
+			"x-dropdown": "projects"
+		},
+		"directory": {
+			"type": "string",
+			"description": "A directory where the to generate the changelog file relative to the project root",
+			"x-prompt": "What directory would you like to use?",
+			"default": "src/migrations/changelogs" 
+		},
+		"format": {
+			"type": "string",
+			"description": "The format of the migration file",
+			"enum": [
+				"sql",
+				"json",
+				"xml",
+				"yaml"
+			],
+			"default": "sql"
+		},
+		"author": {
+			"type": "string",
+			"description": "The author of the changelog"
+		}
+	},
+	"required": [
+		"name",
+		"project",
+		"format"
+	]
+}

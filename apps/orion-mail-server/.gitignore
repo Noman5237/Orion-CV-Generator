@@ -1,0 +1,3 @@
+# gitignore all directory inside data except certs
+data/*
+!data/certs

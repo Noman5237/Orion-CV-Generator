@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "liquibase",
+  "version": "0.0.1",
+  "generators": {
+    "changelog": {
+      "factory": "./src/generators/changelog/generator",
+      "schema": "./src/generators/changelog/schema.json",
+      "description": "changelog generator"
+    }
+  }
+}
