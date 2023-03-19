@@ -32,14 +32,14 @@ const CvEditor = () => {
   //write a function that will get the object sent from the workExperienceForm component and add it to the state
   //write a function that will get the object sent from the customSectionGenerator component and add it to the state
 
-const [education , setEducation] = useState([])
-const [workExperience, setWorkExperience] = useState([])
-const [projects , setProjects] = useState([]);
-const [constact , setConstact] = useState([]);
-const [personalInfo , setPersonalInfo] = useState([])
-const [skill , setSkill] = useState([])
+  const [education, setEducation] = useState([])
+  const [workExperience, setWorkExperience] = useState([])
+  const [projects, setProjects] = useState([]);
+  const [constact, setConstact] = useState([]);
+  const [personalInfo, setPersonalInfo] = useState([])
+  const [skill, setSkill] = useState([])
 
-const [num , setNum] = useState(0)
+  const [num, setNum] = useState(0)
   const { Header, Sider, Content } = Layout;
 
 
@@ -57,18 +57,20 @@ const [num , setNum] = useState(0)
 
   };
 
-const handlePersonalInformations = (data) => {
+  const handlePersonalInformations = (data) => {
     //window.profile.education=[...window.profile.education , data]
+
     
     setPersonalInfo(data)
+
     console.log(data)
 
-}
+  }
 
-const handleSkill=(data)=>{
-    setSkill([...skill , data])
+  const handleSkill = (data) => {
+    setSkill([...skill, data])
 
-}
+  }
   const handleContactInfoSave = (data) => {
     // window.profile.contact = [...window.profile.contact , data]
     // console.log(window.profile)
@@ -127,17 +129,19 @@ const handleSkill=(data)=>{
       <Col span={12}>
 
         <Button type="default" onClick={() => {
-          window.profile = {
+          const profile = {
             education: education,
             contact: constact,
             projects: projects,
             workExperience: workExperience
           }
+          // save profile to local storage
+          localStorage.setItem('profile', JSON.stringify(profile));
         }}>Save</Button>
 
-        <CVPreview personalInfo={personalInfo} educationData={education} skillInfo={skill}  workExperienceData={workExperience}  contactInfoData={constact} projectsData={projects}></CVPreview>
-        
-         </Col>
+        <CVPreview personalInfo={personalInfo} educationData={education} skillInfo={skill} workExperienceData={workExperience} contactInfoData={constact} projectsData={projects} changeData={saveData}></CVPreview>
+
+      </Col>
 
     </Row>
   );
