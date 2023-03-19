@@ -4,6 +4,7 @@ import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import React, { useState } from 'react';
 
 import CvEditor from './cv/CvEditor';
+import CVGenerator from './cv/CVGenerator';
 
 const { Header, Content, Footer } = Layout;
 
@@ -54,7 +55,7 @@ export function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/page-2">Page 2</Link>
+              <Link to="/generate">Page 2</Link>
             </li>
           </ul>
         </Content>
@@ -62,6 +63,7 @@ export function App() {
 
       <Routes>
         <Route path="/" element={<CvEditor />} />
+        <Route path="/generate" element={<CVGenerator />} />
       </Routes>
     </>
   );
