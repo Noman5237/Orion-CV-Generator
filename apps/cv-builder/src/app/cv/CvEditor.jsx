@@ -137,7 +137,7 @@ const CvEditor = () => {
           localStorage.setItem('profile', JSON.stringify(profile));
         }}>Save</Button>
 
-        <CVPreview personalInfo={personalInfo} educationData={education} skillInfo={skill} workExperienceData={workExperience} contactInfoData={constact} projectsData={projects}></CVPreview>
+        <CVPreview personalInfo={personalInfo} educationData={education} skillInfo={skill} workExperienceData={workExperience} contactInfoData={constact} projectsData={projects} changeData={saveData}></CVPreview>
 
       </Col>
 
