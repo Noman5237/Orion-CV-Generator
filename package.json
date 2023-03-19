@@ -79,6 +79,7 @@
     "class-validator": "^0.14.0",
     "express-session": "^1.17.3",
     "firebase": "^9.18.0",
+    "jspdf": "^2.5.1",
     "mongoose": "^7.0.2",
     "openai": "^3.2.1",
     "passport": "^0.6.0",

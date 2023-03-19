@@ -60,7 +60,7 @@ const [num , setNum] = useState(0)
 const handlePersonalInformations = (data) => {
     //window.profile.education=[...window.profile.education , data]
     
-    setPersonalInfo([...personalInfo ,data])
+    setPersonalInfo(data)
     console.log(data)
 
 }

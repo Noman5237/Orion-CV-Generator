@@ -3,6 +3,7 @@ import { Typography, Divider, Button } from 'antd';
 import axios from 'axios';
 
 import { useCallback } from 'react';
+import JsPDF from 'jspdf';
 const { Title, Text } = Typography;
 
 
@@ -13,13 +14,24 @@ const CVPreview = ({personalInfo, educationData,skillInfo, workExperienceData, c
     return link.replace(/^https?:\/\//, '').replace(/^www\./, '');
   }, []);
 
+const generatePDF = () => {
 
+    const report = new JsPDF('portrait','pt','a4');
+    report.html(document.querySelector('#cv')).then(() => {
+        report.save('report.pdf');
+    });
+
+}
 
   return (
     <div>
+        <button onClick={generatePDF} type="button">Export PDF</button>
+        <div id="cv">
       <Title level={2}>{personalInfo.name}</Title>
+       <Title level={3}>About Section:</Title>
   <Text>{personalInfo.about}</Text>
   <br />
+   <Title level={3}>Address:</Title>
   <Text>{personalInfo.address}</Text>
       <Divider />
       <Title level={3}>Education</Title>
@@ -70,6 +82,22 @@ const CVPreview = ({personalInfo, educationData,skillInfo, workExperienceData, c
           <br />
         </div>
       ))}
+
+       <Divider />
+      <Title level={3}>Skills</Title> <ul>
+      {skillInfo.map((skill, index) => (
+        <li key={index}>
+           
+                
+           
+          <Title level={4}>{skill.name}</Title>
+          <Text>proficiency :{skill.proficiency}</Text> 
+          
+         
+          <br />
+         
+        </li>
+      ))} </ul>
       <Divider />
       <Title level={3}>Contact Info</Title>
       {contactInfoData.map((info, index) => (
@@ -115,6 +143,7 @@ const CVPreview = ({personalInfo, educationData,skillInfo, workExperienceData, c
 
 
 
+    </div>
     </div>
   );
 };
