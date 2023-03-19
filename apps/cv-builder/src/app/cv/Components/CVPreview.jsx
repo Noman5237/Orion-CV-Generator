@@ -2,17 +2,25 @@ import React from 'react';
 import { Typography, Divider, Button } from 'antd';
 import axios from 'axios';
 
+import { useCallback } from 'react';
 const { Title, Text } = Typography;
 
-const CVPreview = ({ educationData, workExperienceData, contactInfoData, projectsData, changeData }) => {
-  console.log(educationData, workExperienceData, contactInfoData, projectsData)
+
+const CVPreview = ({personalInfo, educationData,skillInfo, workExperienceData, contactInfoData, projectsData,changeData}) => {
+    console.log(personalInfo,educationData, skillInfo, workExperienceData , contactInfoData , projectsData)
+
+     const cleanLink = useCallback((link) => {
+    return link.replace(/^https?:\/\//, '').replace(/^www\./, '');
+  }, []);
+
+
 
   return (
     <div>
-      <Title level={2}>{contactInfoData.fullName}</Title>
-      <Text strong>{contactInfoData.email}</Text>
-      <br />
-      <Text>{contactInfoData.phone}</Text>
+      <Title level={2}>{personalInfo.name}</Title>
+  <Text>{personalInfo.about}</Text>
+  <br />
+  <Text>{personalInfo.address}</Text>
       <Divider />
       <Title level={3}>Education</Title>
       {educationData.map((education, index) => (
@@ -65,16 +73,43 @@ const CVPreview = ({ educationData, workExperienceData, contactInfoData, project
       <Divider />
       <Title level={3}>Contact Info</Title>
       {contactInfoData.map((info, index) => (
-        <div key={index}>
-          <Title level={4}>{info.email}</Title>
-          <Text>{info.phoneNumber} </Text>
-          <br />
-          <Text>Link : {info.linkedIn}</Text>
-          <br />
 
-          <Text>Link: {info.github}</Text>
+        // <div key={index}>
+        //   <Title level={4}>{info.email}</Title>
+        //   <Text>{info.phoneNumber} </Text>
+        //   <br />
+        //   <Text>Link : {info.linkedIn}</Text>
+        //   <br />
+          
+        //   <Text>Link: {info.github}</Text>
+        //   <br />
+        // </div>
+
+
+        <div className="text-center">
+     
+
+      <a href={`mailto:${info.email}`}>{info.email}</a>
+  
+        <h3>Github</h3>
+      {info.github && (
+        <>
+          <span className="mx-1">•</span>
+          <a href={info.github}>{cleanLink(info.github)}</a>
+
           <br />
-        </div>
+        </>
+      )}
+     
+     <h3>Linked In</h3>
+      {info.linkedin && (
+        <>
+          <span className="mx-1">•</span>
+          <a href={info.linkedIn}>{cleanLink(info.linkedIn)}</a>
+        </>
+      )}
+      
+    </div>
       ))}
 
 

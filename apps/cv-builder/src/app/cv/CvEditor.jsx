@@ -1,4 +1,6 @@
+
 import { Layout, Row, Col, Menu, theme, Button } from 'antd';
+
 import React, { useState } from 'react';
 import {
   MenuFoldOutlined,
@@ -15,6 +17,10 @@ import EducationForm from './Components/Education';
 import ProjectsForm from './Components/Projects';
 import WorkExperienceForm from './Components/WorExperince';
 import CVPreview from './Components/CVPreview';
+import { Link } from 'react-router-dom';
+import PersonalInformationForm from './Components/PersonalInfo';
+import SkillForm from './Components/Skill';
+
 
 
 
@@ -25,13 +31,15 @@ const CvEditor = () => {
   //write a function that will get the object sent from the projectsForm component and add it to the state
   //write a function that will get the object sent from the workExperienceForm component and add it to the state
   //write a function that will get the object sent from the customSectionGenerator component and add it to the state
-  const [education, setEducation] = useState([])
-  const [workExperience, setWorkExperience] = useState([])
-  const [projects, setProjects] = useState([]);
-  const [constact, setConstact] = useState([]);
-  const [num, setNum] = useState(0);
 
+const [education , setEducation] = useState([])
+const [workExperience, setWorkExperience] = useState([])
+const [projects , setProjects] = useState([]);
+const [constact , setConstact] = useState([]);
+const [personalInfo , setPersonalInfo] = useState([])
+const [skill , setSkill] = useState([])
 
+const [num , setNum] = useState(0)
   const { Header, Sider, Content } = Layout;
 
 
@@ -49,6 +57,18 @@ const CvEditor = () => {
 
   };
 
+const handlePersonalInformations = (data) => {
+    //window.profile.education=[...window.profile.education , data]
+    
+    setPersonalInfo([...personalInfo ,data])
+    console.log(data)
+
+}
+
+const handleSkill=(data)=>{
+    setSkill([...skill , data])
+
+}
   const handleContactInfoSave = (data) => {
     // window.profile.contact = [...window.profile.contact , data]
     // console.log(window.profile)
@@ -98,11 +118,14 @@ const CvEditor = () => {
 
     <Row gutter={[16, 16]}>
       <Col span={12}>
+        <PersonalInformationForm onSave={handlePersonalInformations}></PersonalInformationForm>
         <EducationForm onSave={handleEducationSave}></EducationForm>
+        <SkillForm onSave={handleSkill}></SkillForm>
         <ContactForm onSave={handleContactInfoSave}></ContactForm> <ProjectsForm onSave={handleProjectsSave}></ProjectsForm>
         <WorkExperienceForm onSave={handleWorkExperienceSave}></WorkExperienceForm>
       </Col>
       <Col span={12}>
+
         <Button type="default" onClick={() => {
           window.profile = {
             education: education,
@@ -111,8 +134,11 @@ const CvEditor = () => {
             workExperience: workExperience
           }
         }}>Save</Button>
-        <CVPreview educationData={education} workExperienceData={workExperience} contactInfoData={constact} projectsData={projects} changeData={saveData}></CVPreview>
-      </Col>
+
+        <CVPreview personalInfo={personalInfo} educationData={education} skillInfo={skill}  workExperienceData={workExperience}  contactInfoData={constact} projectsData={projects}></CVPreview>
+        
+         </Col>
+
     </Row>
   );
 };
